@@ -1,6 +1,6 @@
 # Bookcase-webapp
 
-> Merchant webapp
+> Bookcase webapp
 
 ## Build Setup
 
