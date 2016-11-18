@@ -13,7 +13,10 @@
   },
   "dependencies": {
     "admin-lte": "^2.3.6",
+    "bootstrap-datepicker": "^1.6.4",
+    "es6-promise": "^4.0.5",
     "jquery": "^2.2.3",
+    "lodash": "^4.16.6",
     "vue": "^2.0.3",
     "vuex": "^2.0.0",
     "vue-router": "^2.0.1"

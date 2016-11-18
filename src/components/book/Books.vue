@@ -9,10 +9,21 @@
 
 <script>
 import AppContent from 'components/AppContent';
+import { fetchHome } from 'src/services/BookService';
 
 export default {
   components: {
     AppContent,
   },
+  created() {
+    fetchHome()
+      .then(resp => this.showMerchants(resp));
+  },
+  methods: {
+    showMerchants(resp) {
+      console.log(resp);
+    },
+  },
+
 };
 </script>
