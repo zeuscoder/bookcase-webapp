@@ -8,9 +8,9 @@ export function fetchHome() {
   });
 }
 
-export function fetchBooks() {
+export function fetchBooks(params) {
   return $.ajax({
     type: 'GET',
-    url: apiUrl(''),
+    url: apiUrl('books', params),
   });
 }
