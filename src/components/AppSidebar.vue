@@ -41,20 +41,24 @@
         <router-link to="/orders" tag="li">
           <a><i class="fa fa-link"></i> <span>订单管理</span></a>
         </router-link>
-        <router-link to="/accounts" tag="li">
-          <a><i class="fa fa-link"></i> <span>账号管理</span></a>
-        </router-link>
-        <!-- <li class="treeview">
-          <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
+        <li class="treeview">
+          <a href="#"><i class="fa fa-link"></i> <span>交易管理</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#">Link in level 2</a></li>
-            <li><a href="#">Link in level 2</a></li>
+            <router-link to="/trades/deals" tag="li">
+              <a><i class="fa fa-link"></i> <span>交易平台</span></a>
+            </router-link>
+            <router-link to="/trades/records" tag="li">
+              <a><i class="fa fa-link"></i> <span>交易记录</span></a>
+            </router-link>
           </ul>
-        </li> -->
+        </li>
+        <router-link to="/accounts" tag="li">
+          <a><i class="fa fa-link"></i> <span>账号管理</span></a>
+        </router-link> 
       </ul>
       <!-- /.sidebar-menu -->
     </section>

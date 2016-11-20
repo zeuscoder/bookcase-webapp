@@ -14,3 +14,10 @@ export function fetchBooks(params) {
     url: apiUrl('books', params),
   });
 }
+
+export function fetchBookCategories() {
+  return $.ajax({
+    type: 'GET',
+    url: apiUrl('books/categories'),
+  });
+}

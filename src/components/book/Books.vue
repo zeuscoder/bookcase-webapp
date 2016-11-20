@@ -25,6 +25,17 @@
           </div>
         </div>
       </div>
+      <div class="row">
+        <div class="col-md-3 form-group">
+          <label class="col-md-4 control-label" for="category">图书类型:</label>
+          <div class="col-md-8">
+            <select class="form-control" id="category" v-model.number="params.category">
+              <option :value="0">全部</option>
+              <option v-for="category in categories" :value="category.categoryId">{{ category.categoryName }}</option>
+            </select>
+          </div>
+        </div>
+      </div>
       <br/>
       <div class="row">
         <div class="col-md-2 col-md-offset-7">
@@ -86,7 +97,7 @@
 <script>
 import AppContent from 'components/AppContent';
 import Page from 'components/public/Page';
-import { fetchBooks } from 'src/services/BookService';
+import { fetchBooks, fetchBookCategories } from 'src/services/BookService';
 
 export default {
   components: {
@@ -100,18 +111,29 @@ export default {
         title: '',
         authors: '',
         isbn: '',
+        category: 0,
         page: 1,
-        pageSize: 2,
+        pageSize: 10,
       },
+      categories: [],
       isDetailShownIndex: -1,
       total: 0,
       currentPage: 1,
     };
   },
   created() {
+    this.getCategories();
     this.getBooks(1);
   },
   methods: {
+    getCategories() {
+      fetchBookCategories().then((resp) => {
+        if (resp.result === 0) {
+          this.categories = resp.data;
+          console.log(this.categories);
+        }
+      });
+    },
     getBooks(page) {
       this.isDetailShownIndex = -1;
       this.params.page = page;
@@ -133,6 +155,7 @@ export default {
       this.params.title = '';
       this.params.authors = '';
       this.params.isbn = '';
+      this.params.category = 0;
     },
     showDetail(index) {
       if (index === this.isDetailShownIndex) {

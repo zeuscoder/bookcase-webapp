@@ -5,6 +5,8 @@ import AccountRolesView from 'components/account/AccountRolesView';
 import Books from './components/book/Books';
 import Orders from './components/order/Orders';
 import Articles from './components/article/Articles';
+import Deals from './components/trade/Deals';
+import Records from './components/trade/Records';
 
 const router = new VueRouter({
   mode: 'history',
@@ -13,7 +15,7 @@ const router = new VueRouter({
   routes: [
     {
       path: '/',
-      redirect: '/accounts',
+      redirect: '/books',
     },
 
     {
@@ -29,6 +31,16 @@ const router = new VueRouter({
     {
       path: '/articles',
       component: Articles,
+    },
+
+    {
+      path: '/trades/deals',
+      component: Deals,
+    },
+
+    {
+      path: '/trades/records',
+      component: Records,
     },
 
     {
