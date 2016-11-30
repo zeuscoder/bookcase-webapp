@@ -122,10 +122,20 @@ export default {
     };
   },
   created() {
+    this.initQueryParams();
     this.getCategories();
-    this.getBooks(1);
+    this.getBooks(this.params.page);
   },
   methods: {
+    initQueryParams() {
+      const queryParams = this.$route.query;
+      if (queryParams.page && queryParams.pageSize) {
+        queryParams.page = parseInt(queryParams.page, 10);
+        queryParams.pageSize = parseInt(queryParams.pageSize, 10);
+        queryParams.category = parseInt(queryParams.category, 10);
+        this.params = { ...queryParams };
+      }
+    },
     getCategories() {
       fetchBookCategories().then((resp) => {
         if (resp.result === 0) {
@@ -142,6 +152,7 @@ export default {
           this.books = resp.data;
           this.total = resp.total;
           this.currentPage = page;
+          this.$router.replace({ path: '/books', query: { ...this.params } });
         }
       });
     },
