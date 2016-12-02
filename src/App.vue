@@ -11,7 +11,7 @@
         <app-content></app-content>
       </template>
     </div>
-    
+
     <app-footer></app-footer>
 
   </div>
@@ -39,7 +39,7 @@ export default {
 </script>
 
 <style>
-@import '../node_modules/admin-lte/bootstrap/css/bootstrap.css';
+/*@import '../node_modules/admin-lte/bootstrap/css/bootstrap.css';*/
 @import '../node_modules/admin-lte/dist/css/AdminLTE.css';
 @import '../node_modules/admin-lte/dist/css/skins/skin-green.css';
 </style>

@@ -11,6 +11,9 @@ var env = process.env.NODE_ENV === 'testing'
   : config.build.env
 
 var webpackConfig = merge(baseWebpackConfig, {
+  entry: {
+    ext: '../node_modules/admin-lte/bootstrap/css/bootstrap.css',
+  },
   module: {
     loaders: utils.styleLoaders({ sourceMap: config.build.productionSourceMap, extract: true })
   },
