@@ -1,8 +1,6 @@
 <template>
   <app-content>
-    <h1 slot="header">
-      书籍管理
-    </h1>
+    <title-view title="书籍管理" slot="header"></title-view>
     <br>
     <form class="form-horizontal">
       <div class="row">
@@ -96,12 +94,14 @@
 
 <script>
 import AppContent from 'components/AppContent';
+import TitleView from 'components/public/TitleView';
 import Page from 'components/public/Page';
 import { fetchBooks, fetchBookCategories } from 'src/services/BookService';
 
 export default {
   components: {
     AppContent,
+    TitleView,
     Page,
   },
   data() {
