@@ -8,10 +8,10 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="../assets/logo.png" class="img-circle" alt="User Image">
+          <img src="../assets/user.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Alexander Pierce</p>
+          <p>Zeus Coder</p>
           <!-- Status -->
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
@@ -56,9 +56,9 @@
             </router-link>
           </ul>
         </li>
-        <router-link to="/accounts" tag="li">
+        <router-link to="/accounts/users" tag="li">
           <a><i class="fa fa-link"></i> <span>账号管理</span></a>
-        </router-link> 
+        </router-link>
       </ul>
       <!-- /.sidebar-menu -->
     </section>

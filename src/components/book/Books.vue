@@ -4,33 +4,43 @@
     <br>
     <form class="form-horizontal">
       <div class="row">
-        <div class="col-md-3 form-group">
-          <label class="col-md-4 control-label" for="title">图书标题:</label>
-          <div class="col-md-8">
+        <div class="col-md-3 form-group auto-width">
+          <label class="col-md-4 control-label-center auto-width" for="title">图书标题:</label>
+          <div class="col-md-8 auto-width">
             <input class="form-control" id="title" placeholder="图书标题" v-model.trim="queryParams.title">
           </div>
         </div>
-        <div class="col-md-3 form-group">
-          <label class="col-md-4 control-label" for="authors">图书作者:</label>
-          <div class="col-md-8">
+        <div class="col-md-3 form-group auto-width">
+          <label class="col-md-4 control-label-center auto-width" for="authors">图书作者:</label>
+          <div class="col-md-8 auto-width">
             <input class="form-control" id="authors" placeholder="图书作者" v-model.trim="queryParams.authors">
           </div>
         </div>
-        <div class="col-md-3 form-group">
-          <label class="col-md-4 control-label" for="isbn">ISBN:</label>
-          <div class="col-md-8">
+        <div class="col-md-3 form-group auto-width">
+          <label class="col-md-4 control-label-center auto-width" for="isbn">ISBN:</label>
+          <div class="col-md-8 auto-width">
             <input class="form-control" id="isbn" placeholder="ISBN" v-model.trim="queryParams.isbn">
           </div>
         </div>
-      </div>
-      <div class="row">
         <div class="col-md-3 form-group">
-          <label class="col-md-4 control-label" for="category">图书类型:</label>
+          <label class="col-md-4 control-label-center" for="category">图书类型:</label>
           <div class="col-md-8">
             <select class="form-control" id="category" v-model.number="queryParams.category">
               <option :value="0">全部</option>
               <option v-for="category in categories" :value="category.categoryId">{{ category.categoryName }}</option>
             </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3 form-group auto-width">
+          <label class="col-md-4 control-label-center auto-width">出版日期:</label>
+          <div class="col-md-3 auto-width">
+            <date-picker></date-picker>
+          </div>
+          <label class="col-md-1 control-label auto-width">至</label>
+          <div class="col-md-3 auto-width">
+            <date-picker></date-picker>
           </div>
         </div>
       </div>
@@ -74,6 +84,7 @@
                   <td>{{ book.publishDate }}</td>
                   <td>
                     <a href="javascript:void(0)" @click="showDetail(index)">详情</a>
+                    <a href="javascript:void(0)" @click="alertMsg(index)">展示</a>
                   </td>
                 </tr>
                 <tr v-show="index == isDetailShownIndex" style="background-color: #ccc">
@@ -98,6 +109,7 @@
           <page :total="total" :pageSize="queryParams.pageSize" :currentPage="currentPage" @pageOnclick="getCurrentBooks"></page>
         </div>
       </div>
+      <alert-modal ref="alertModal"></alert-modal>
   </app-content>
 </template>
 
@@ -105,13 +117,17 @@
 import AppContent from 'components/AppContent';
 import TitleView from 'components/public/TitleView';
 import Page from 'components/public/Page';
+import AlertModal from 'components/public/AlertModal';
 import { fetchBooks, fetchBookCategories } from 'src/services/BookService';
+import DatePicker from '../public/DatePicker';
 
 export default {
   components: {
     AppContent,
     TitleView,
     Page,
+    AlertModal,
+    DatePicker,
   },
   data() {
     return {
@@ -185,6 +201,9 @@ export default {
       }
       this.isDetailShownIndex = index;
     },
+    alertMsg(index) {
+      this.$refs.alertModal.alert(index);
+    },
   },
 
 };
@@ -200,8 +219,11 @@ export default {
     position: relative;
     margin-right: 10px;
   }
-  .vertical-center {
-    height: 34px;
-    line-height: 34px;
+  .control-label-center {
+    text-align: left;
+    margin-top: 7px;
+  }
+  .auto-width {
+    width: auto;
   }
 </style>>

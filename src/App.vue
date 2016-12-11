@@ -18,6 +18,8 @@
 </template>
 
 <script>
+import 'bootstrap-datepicker/dist/js/bootstrap-datepicker';
+import 'bootstrap-datepicker/dist/locales/bootstrap-datepicker.zh-CN.min';
 import 'admin-lte/bootstrap/js/bootstrap';
 import 'admin-lte';
 import 'admin-lte/plugins/slimScroll/jquery.slimscroll';
@@ -42,4 +44,5 @@ export default {
 /*@import '../node_modules/admin-lte/bootstrap/css/bootstrap.css';*/
 @import '../node_modules/admin-lte/dist/css/AdminLTE.css';
 @import '../node_modules/admin-lte/dist/css/skins/skin-green.css';
+@import '../node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css';
 </style>
