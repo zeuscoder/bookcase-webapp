@@ -23,7 +23,7 @@
   }
   .titleView em {
     display: inline-block;
-    background-color: #FF8D06;
+    background-color: #39b54a;
     width: 4px;
     height: 25px;
     margin-right: 10px;

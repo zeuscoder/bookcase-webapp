@@ -7,19 +7,19 @@
         <div class="col-md-3 form-group">
           <label class="col-md-4 control-label" for="title">图书标题:</label>
           <div class="col-md-8">
-            <input class="form-control" id="title" placeholder="图书标题" v-model.trim="params.title">
+            <input class="form-control" id="title" placeholder="图书标题" v-model.trim="queryParams.title">
           </div>
         </div>
         <div class="col-md-3 form-group">
           <label class="col-md-4 control-label" for="authors">图书作者:</label>
           <div class="col-md-8">
-            <input class="form-control" id="authors" placeholder="图书作者" v-model.trim="params.authors">
+            <input class="form-control" id="authors" placeholder="图书作者" v-model.trim="queryParams.authors">
           </div>
         </div>
         <div class="col-md-3 form-group">
           <label class="col-md-4 control-label" for="isbn">ISBN:</label>
           <div class="col-md-8">
-            <input class="form-control" id="isbn" placeholder="ISBN" v-model.trim="params.isbn">
+            <input class="form-control" id="isbn" placeholder="ISBN" v-model.trim="queryParams.isbn">
           </div>
         </div>
       </div>
@@ -27,7 +27,7 @@
         <div class="col-md-3 form-group">
           <label class="col-md-4 control-label" for="category">图书类型:</label>
           <div class="col-md-8">
-            <select class="form-control" id="category" v-model.number="params.category">
+            <select class="form-control" id="category" v-model.number="queryParams.category">
               <option :value="0">全部</option>
               <option v-for="category in categories" :value="category.categoryId">{{ category.categoryName }}</option>
             </select>
@@ -37,7 +37,7 @@
       <br/>
       <div class="row">
         <div class="col-md-2 col-md-offset-7">
-          <a class="btn btn-block btn-primary" @click="queryParams">查询</a>
+          <a class="btn btn-block btn-primary" @click="query">查询</a>
         </div>
         <div class="col-md-2">
           <a class="btn btn-block btn-primary" @click="resetParams">清空</a>
@@ -64,7 +64,7 @@
             <tbody>
               <template v-for="(book, index) in books">
                 <tr>
-                  <td>{{ index + 1 }}</td>
+                  <td>{{ (queryParams.page - 1) * queryParams.pageSize + index + 1 }}</td>
                   <td>{{ book.title }}</td>
                   <td>{{ book.authors }}</td>
                   <td>{{ book.isbn }}</td>
@@ -77,16 +77,25 @@
                   </td>
                 </tr>
                 <tr v-show="index == isDetailShownIndex" style="background-color: #ccc">
-                  <td colspan="8" class="form-horizontal" style="text-align: left;">
-                    <div class="row">
-                      123
+                  <td></td>
+                  <td :colspan="shownRowsTotal" class="form-horizontal" style="text-align: left;">
+                    <div class="row" style="padding: 10px 20px 10px 20px;">
+                      <span class="col-md-2">
+                        书籍页数：{{ book.pages }}
+                      </span>
+                      <span class="col-md-2">
+                        书籍评分：{{ book.rating }}
+                      </span>
+                      <span class="col-md-2">
+                        书籍简介：{{ book.summary }}
+                      </span>
                     </div>
                   </td>
                 </tr>
               </template>
             </tbody>
           </table>
-          <page :total="total" :pageSize="params.pageSize" :currentPage="currentPage" @pageOnclick="getCurrentBooks"></page>
+          <page :total="total" :pageSize="queryParams.pageSize" :currentPage="currentPage" @pageOnclick="getCurrentBooks"></page>
         </div>
       </div>
   </app-content>
@@ -107,7 +116,7 @@ export default {
   data() {
     return {
       books: [],
-      params: {
+      queryParams: {
         title: '',
         authors: '',
         isbn: '',
@@ -119,21 +128,22 @@ export default {
       isDetailShownIndex: -1,
       total: 0,
       currentPage: 1,
+      shownRowsTotal: 9,
     };
   },
   created() {
     this.initQueryParams();
     this.getCategories();
-    this.getBooks(this.params.page);
+    this.getBooks(this.queryParams.page);
   },
   methods: {
     initQueryParams() {
-      const queryParams = this.$route.query;
-      if (queryParams.page && queryParams.pageSize) {
-        queryParams.page = parseInt(queryParams.page, 10);
-        queryParams.pageSize = parseInt(queryParams.pageSize, 10);
-        queryParams.category = parseInt(queryParams.category, 10);
-        this.params = { ...queryParams };
+      const query = this.$route.query;
+      if (query.page && query.pageSize) {
+        query.page = parseInt(query.page, 10);
+        query.pageSize = parseInt(query.pageSize, 10);
+        query.category = parseInt(query.category, 10);
+        this.queryParams = { ...query };
       }
     },
     getCategories() {
@@ -146,27 +156,27 @@ export default {
     },
     getBooks(page) {
       this.isDetailShownIndex = -1;
-      this.params.page = page;
-      fetchBooks(this.params).then((resp) => {
+      this.queryParams.page = page;
+      fetchBooks(this.queryParams).then((resp) => {
         if (resp.result === 0) {
           this.books = resp.data;
           this.total = resp.total;
           this.currentPage = page;
-          this.$router.replace({ path: '/books', query: { ...this.params } });
+          this.$router.replace({ path: '/books', query: { ...this.queryParams } });
         }
       });
     },
     getCurrentBooks(page) {
       this.getBooks(page);
     },
-    queryParams() {
+    query() {
       this.getBooks(1);
     },
     resetParams() {
-      this.params.title = '';
-      this.params.authors = '';
-      this.params.isbn = '';
-      this.params.category = 0;
+      this.queryParams.title = '';
+      this.queryParams.authors = '';
+      this.queryParams.isbn = '';
+      this.queryParams.category = 0;
     },
     showDetail(index) {
       if (index === this.isDetailShownIndex) {
