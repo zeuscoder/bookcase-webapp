@@ -1,18 +1,18 @@
 <template>
   <app-content>
-    <h1 slot="header">
-      文章管理
-    </h1>
-    <div></div>
+    <title-view title="文章管理" slot="header"></title-view>
+    <div>123</div>
   </app-content>
 </template>
 
 <script>
 import AppContent from 'components/AppContent';
+import TitleView from 'components/public/TitleView';
 
 export default {
   components: {
     AppContent,
+    TitleView,
   },
 };
 </script>

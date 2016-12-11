@@ -1,5 +1,5 @@
 import VueRouter from 'vue-router';
-import AccountMain from 'components/account/AccountMain';
+import AccountHome from 'components/account/AccountHome';
 import AccountsView from 'components/account/AccountsView';
 import AccountRolesView from 'components/account/AccountRolesView';
 import Books from './components/book/Books';
@@ -45,9 +45,9 @@ const router = new VueRouter({
 
     {
       path: '/accounts',
-      component: AccountMain,
+      component: AccountHome,
       children: [
-        { path: '', component: AccountsView },
+        { path: 'users', component: AccountsView },
         { path: 'roles', component: AccountRolesView },
       ],
     },

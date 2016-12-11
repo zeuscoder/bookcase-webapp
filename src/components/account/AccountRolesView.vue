@@ -1,6 +1,5 @@
 <template>
-  <div class="roles">
-    <h2>Roles</h2>
+  <div>
     <div class="box">
       <div class="box-header">
         <h3 class="box-title" v-on:click="test">只有管理员才有权限新增子账号和分配权限</h3>
