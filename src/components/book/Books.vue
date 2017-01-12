@@ -22,9 +22,9 @@
             <input class="form-control" id="isbn" placeholder="ISBN" v-model.trim="queryParams.isbn">
           </div>
         </div>
-        <div class="col-md-3 form-group">
-          <label class="col-md-4 control-label-center" for="category">图书类型:</label>
-          <div class="col-md-8">
+        <div class="col-md-3 form-group auto-width">
+          <label class="col-md-4 control-label-center auto-width" for="category">图书类型:</label>
+          <div class="col-md-8 auto-width">
             <select class="form-control" id="category" v-model.number="queryParams.category">
               <option :value="0">全部</option>
               <option v-for="category in categories" :value="category.categoryId">{{ category.categoryName }}</option>
@@ -43,10 +43,7 @@
             <date-picker></date-picker>
           </div>
         </div>
-      </div>
-      <br/>
-      <div class="row">
-        <div class="col-md-2 col-md-offset-7">
+        <div class="col-md-2">
           <a class="btn btn-block btn-primary" @click="query">查询</a>
         </div>
         <div class="col-md-2">
