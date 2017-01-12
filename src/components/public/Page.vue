@@ -4,11 +4,11 @@
       <span>共{{ total }}项&nbsp;&nbsp;&nbsp;&nbsp;{{ currentPage }} / {{ totalPage }}页</span>
       <nav class="left">
         <ul class="pagination">
-          <li :class="{disabled: currentPage == 1}"><a href="javascript:void(0);" @click="pagingOnclick(1)">&laquo;</a></li>
-          <li :class="{disabled: currentPage == 1}"><a href="javascript:void(0);" @click="pagingOnclick(currentPage - 1)">&lsaquo;</a></li>
-          <li class="page" v-for="i in this.totalPage" v-if="isShow(i)" :class="{active: currentPage == i}" @click="pagingOnclick(i)"><a href="javascript:void(0);">{{ i }}</a></li>
-          <li :class="{disabled: currentPage == totalPage}"><a href="javascript:void(0);" @click="pagingOnclick(currentPage + 1)">&rsaquo;</a></li>
-          <li :class="{disabled: currentPage == totalPage}"><a href="javascript:void(0);" @click="pagingOnclick(totalPage)">&raquo;</a></li>
+          <li :class="{disabled: currentPage == 1}"><a @click="pagingOnclick(1)">&laquo;</a></li>
+          <li :class="{disabled: currentPage == 1}"><a @click="pagingOnclick(currentPage - 1)">&lsaquo;</a></li>
+          <li class="page" v-for="i in this.totalPage" v-if="isShow(i)" :class="{active: currentPage == i}" @click="pagingOnclick(i)"><a>{{ i }}</a></li>
+          <li :class="{disabled: currentPage == totalPage}"><a @click="pagingOnclick(currentPage + 1)">&rsaquo;</a></li>
+          <li :class="{disabled: currentPage == totalPage}"><a @click="pagingOnclick(totalPage)">&raquo;</a></li>
         </ul>
       </nav>
     </div>
@@ -70,5 +70,8 @@
   }
   .pull-right nav {
     float: left;
+  }
+  a {
+    cursor: pointer;
   }
 </style>

@@ -83,8 +83,8 @@
                   <td>{{ book.publisher }}</td>
                   <td>{{ book.publishDate }}</td>
                   <td>
-                    <a href="javascript:void(0)" @click="showDetail(index)">详情</a>
-                    <a href="javascript:void(0)" @click="alertMsg(index)">展示</a>
+                    <a @click="showDetail(index)">详情</a>
+                    <a @click="alertMsg(index)">展示</a>
                   </td>
                 </tr>
                 <tr v-show="index == isDetailShownIndex" style="background-color: #ccc">
@@ -218,6 +218,7 @@ export default {
   a {
     position: relative;
     margin-right: 10px;
+    cursor: pointer;
   }
   .control-label-center {
     text-align: left;
