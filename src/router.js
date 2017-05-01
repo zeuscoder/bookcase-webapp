@@ -1,12 +1,15 @@
+import Vue from 'vue';
 import VueRouter from 'vue-router';
 import AccountHome from 'components/account/AccountHome';
 import AccountsView from 'components/account/AccountsView';
 import AccountRolesView from 'components/account/AccountRolesView';
-import Books from './components/book/Books';
-import Orders from './components/order/Orders';
-import Articles from './components/article/Articles';
-import Deals from './components/trade/Deals';
-import Records from './components/trade/Records';
+import Books from 'components/book/Books';
+import Orders from 'components/order/Orders';
+import Articles from 'components/article/Articles';
+import Deals from 'components/trade/Deals';
+import Records from 'components/trade/Records';
+
+Vue.use(VueRouter);
 
 const router = new VueRouter({
   mode: 'history',
