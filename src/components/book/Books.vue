@@ -57,6 +57,7 @@
         <table class="table table-bordered table-hover">
             <thead>
             <tr>
+              <th><input type="checkbox" v-model="isAllChecked" @click="checkedAll" /></th>
               <th>序号</th>
               <th>书名</th>
               <th>作者</th>
@@ -71,6 +72,7 @@
             <tbody>
               <template v-for="(book, index) in books">
                 <tr>
+                  <td><input type="checkbox" v-model="checkedBookIds" :value="book.bookId" /></td>
                   <td>{{ (queryParams.page - 1) * queryParams.pageSize + index + 1 }}</td>
                   <td>{{ book.title }}</td>
                   <td>{{ book.authors }}</td>
@@ -142,6 +144,8 @@ export default {
       total: 0,
       currentPage: 1,
       shownRowsTotal: 9,
+      isAllChecked: false,
+      checkedBookIds: [],
     };
   },
   created() {
@@ -201,8 +205,27 @@ export default {
     alertMsg(index) {
       this.$refs.alertModal.alert(index);
     },
+    // 复选框全选或反选
+    checkedAll() {
+      if (this.checkedBookIds.length === this.books.length) {
+        this.checkedBookIds = [];
+      } else {
+        this.checkedBookIds = [];
+        for (let index = 0; index < this.books.length; index += 1) {
+          this.checkedBookIds.push(this.books[index].bookId);
+        }
+      }
+    },
   },
-
+  watch: {
+    checkedBookIds() {
+      if (this.checkedBookIds.length === this.books.length) {
+        this.isAllChecked = true;
+      } else {
+        this.isAllChecked = false;
+      }
+    },
+  },
 };
 </script>
 
