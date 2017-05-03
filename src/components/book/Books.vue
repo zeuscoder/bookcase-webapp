@@ -230,11 +230,6 @@ export default {
 </script>
 
 <style scoped>
-  .table th,
-  .table td {
-    text-align: center;
-    height: 38px;
-  }
   a {
     position: relative;
     margin-right: 10px;

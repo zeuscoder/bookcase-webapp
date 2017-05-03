@@ -41,8 +41,16 @@ export default {
 </script>
 
 <style>
-@import '../node_modules/admin-lte/bootstrap/css/bootstrap.css';
 @import '../node_modules/admin-lte/dist/css/AdminLTE.css';
 @import '../node_modules/admin-lte/dist/css/skins/skin-green.css';
 @import '../node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css';
+
+.table > thead > tr > th, .table > tbody > tr > td {
+  height: 40px;
+  box-sizing: border-box;
+  text-align: center;
+  vertical-align: middle;
+  position: relative;
+  text-overflow: ellipsis;
+}
 </style>
