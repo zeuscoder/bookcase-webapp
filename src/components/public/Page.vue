@@ -1,6 +1,6 @@
 <template>
-  <div style="height:79px" v-if="total > 0">
-    <div class="pull-right">
+  <div v-if="total > 0">
+    <div class="paging-view">
       <span>共{{ total }}项&nbsp;&nbsp;&nbsp;&nbsp;{{ currentPage }} / {{ totalPage }}页</span>
       <nav class="left">
         <ul class="pagination">
@@ -58,20 +58,12 @@
   };
 </script>
 
-<style scoped>
-  .pull-right {
-    height: 79px;
-  }
-  .pull-right span {
-    float: left;
-    height: 79px;
-    line-height: 79px;
-    margin-right: 15px;
-  }
-  .pull-right nav {
-    float: left;
-  }
-  a {
-    cursor: pointer;
+<style rel="stylesheet/scss" lang="scss" scoped>
+  $paging-view--height: 80px;
+  .paging-view {
+    height: $paging-view--height;
+    float: right;
+    span { float: left; margin-right: 15px; height: $paging-view--height; line-height: $paging-view--height; }
+    nav { float: left; }
   }
 </style>

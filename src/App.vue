@@ -53,4 +53,8 @@ export default {
   position: relative;
   text-overflow: ellipsis;
 }
+
+a {
+  cursor: pointer;
+}
 </style>

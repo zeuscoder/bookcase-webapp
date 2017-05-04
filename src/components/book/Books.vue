@@ -232,8 +232,7 @@ export default {
 <style scoped>
   a {
     position: relative;
-    margin-right: 10px;
-    cursor: pointer;
+    margin-right: 20px;
   }
   .control-label-center {
     text-align: left;
