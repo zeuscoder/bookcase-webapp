@@ -32,9 +32,21 @@
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu">
         <li class="header">管理菜单</li>
-        <router-link to="/books" tag="li">
-          <a><i class="fa fa-link"></i> <span>书籍管理</span></a>
-        </router-link>
+        <li class="treeview">
+          <a href="#"><i class="fa fa-book"></i> <span>书籍管理</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <router-link to="/books/sale" tag="li">
+              <a><i class="fa fa-link"></i> <span>已上架书籍</span></a>
+            </router-link>
+            <router-link to="/books/pending" tag="li">
+              <a><i class="fa fa-link"></i> <span>待完善书籍</span></a>
+            </router-link>
+          </ul>
+        </li>
         <router-link to="/articles" tag="li">
           <a><i class="fa fa-link"></i> <span>文章管理</span></a>
         </router-link>

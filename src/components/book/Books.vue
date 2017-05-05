@@ -157,9 +157,9 @@ export default {
     initQueryParams() {
       const query = this.$route.query;
       if (query.page && query.pageSize) {
-        query.page = parseInt(query.page, 10);
-        query.pageSize = parseInt(query.pageSize, 10);
-        query.category = parseInt(query.category, 10);
+        query.page = Number(query.page);
+        query.pageSize = Number(query.pageSize);
+        query.category = Number(query.category);
         this.queryParams = { ...query };
       }
     },
@@ -167,7 +167,6 @@ export default {
       fetchBookCategories().then((resp) => {
         if (resp.result === 0) {
           this.categories = resp.data;
-          console.log(this.categories);
         }
       });
     },
@@ -219,11 +218,7 @@ export default {
   },
   watch: {
     checkedBookIds() {
-      if (this.checkedBookIds.length === this.books.length) {
-        this.isAllChecked = true;
-      } else {
-        this.isAllChecked = false;
-      }
+      this.isAllChecked = (this.checkedBookIds.length === this.books.length);
     },
   },
 };

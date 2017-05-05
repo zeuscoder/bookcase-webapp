@@ -4,6 +4,7 @@ import AccountHome from 'components/account/AccountHome';
 import AccountsView from 'components/account/AccountsView';
 import AccountRolesView from 'components/account/AccountRolesView';
 import Books from 'components/book/Books';
+import PendingBooks from 'components/book/PendingBooks';
 import Orders from 'components/order/Orders';
 import Articles from 'components/article/Articles';
 import Deals from 'components/trade/Deals';
@@ -18,12 +19,23 @@ const router = new VueRouter({
   routes: [
     {
       path: '/',
-      redirect: '/books',
+      redirect: '/books/sale',
     },
 
     {
       path: '/books',
+      redirect: '/books/sale',
+    },
+
+
+    {
+      path: '/books/sale',
       component: Books,
+    },
+
+    {
+      path: '/books/pending',
+      component: PendingBooks,
     },
 
     {
