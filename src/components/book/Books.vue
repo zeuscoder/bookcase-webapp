@@ -84,6 +84,7 @@
                   <td>
                     <a @click="showDetail(index)">详情</a>
                     <a @click="alertMsg(index)">展示</a>
+                    <router-link :to="{ path: `/books/${book.bookId}` }">去完善</router-link>
                   </td>
                 </tr>
                 <tr v-show="index == isDetailShownIndex" style="background-color: #ccc">
@@ -117,7 +118,7 @@ import AppContent from 'components/AppContent';
 import TitleView from 'components/public/TitleView';
 import Page from 'components/public/Page';
 import AlertModal from 'components/public/AlertModal';
-import { fetchBooks, fetchBookCategories } from 'src/services/BookService';
+import { fetchBooks, fetchBookCategories } from 'services/BookService';
 import DatePicker from '../public/DatePicker';
 
 export default {

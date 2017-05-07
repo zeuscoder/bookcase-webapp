@@ -32,44 +32,32 @@
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu">
         <li class="header">管理菜单</li>
-        <li class="treeview">
-          <a href="#"><i class="fa fa-book"></i> <span>书籍管理</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <router-link to="/books/sale" tag="li">
-              <a><i class="fa fa-link"></i> <span>已上架书籍</span></a>
-            </router-link>
-            <router-link to="/books/pending" tag="li">
-              <a><i class="fa fa-link"></i> <span>待完善书籍</span></a>
-            </router-link>
-          </ul>
-        </li>
+        <router-link to="/books" tag="li">
+          <a><i class="fa fa-book"></i> <span>书籍管理</span></a>
+        </router-link>
         <router-link to="/articles" tag="li">
-          <a><i class="fa fa-link"></i> <span>文章管理</span></a>
+          <a><i class="fa ion-pricetag"></i> <span>文章管理</span></a>
         </router-link>
         <router-link to="/orders" tag="li">
-          <a><i class="fa fa-link"></i> <span>订单管理</span></a>
+          <a><i class="fa fa-shopping-cart"></i> <span>订单管理</span></a>
         </router-link>
         <li class="treeview">
-          <a href="#"><i class="fa fa-link"></i> <span>交易管理</span>
+          <a href="#"><i class="fa fa-exchange"></i> <span>交易管理</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
             <router-link to="/trades/deals" tag="li">
-              <a><i class="fa fa-link"></i> <span>交易平台</span></a>
+              <a><i class="fa ion-pricetag"></i> <span>交易平台</span></a>
             </router-link>
             <router-link to="/trades/records" tag="li">
-              <a><i class="fa fa-link"></i> <span>交易记录</span></a>
+              <a><i class="fa ion-pricetag"></i> <span>交易记录</span></a>
             </router-link>
           </ul>
         </li>
         <router-link to="/accounts/users" tag="li">
-          <a><i class="fa fa-link"></i> <span>账号管理</span></a>
+          <a><i class="fa fa-user"></i> <span>账号管理</span></a>
         </router-link>
       </ul>
       <!-- /.sidebar-menu -->

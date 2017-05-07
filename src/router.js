@@ -19,22 +19,16 @@ const router = new VueRouter({
   routes: [
     {
       path: '/',
-      redirect: '/books/sale',
+      redirect: '/books',
     },
 
     {
       path: '/books',
-      redirect: '/books/sale',
-    },
-
-
-    {
-      path: '/books/sale',
       component: Books,
     },
 
     {
-      path: '/books/pending',
+      path: '/books/:bookId',
       component: PendingBooks,
     },
 

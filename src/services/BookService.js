@@ -21,3 +21,10 @@ export function fetchBookCategories() {
     url: apiUrl('books/categories'),
   });
 }
+
+export function fetchBookInfo(bookId) {
+  return $.ajax({
+    type: 'GET',
+    url: apiUrl(`books/${bookId}`),
+  });
+}

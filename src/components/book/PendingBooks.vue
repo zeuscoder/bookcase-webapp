@@ -14,7 +14,7 @@
               <div class="form-group">
                 <label class="col-sm-3 col-md-3 col-lg-2 control-label">书籍名称</label>
                 <div class="col-sm-8 col-md-8 col-lg-6">
-                  <input class="form-control" />
+                  <input class="form-control" v-model="bookInfo.title"/>
                 </div>
               </div>
               <div class="form-group">
@@ -115,7 +115,7 @@
               <div class="form-group">
                 <label class="col-sm-3 col-md-4 col-lg-3 control-label">备注</label>
                 <div class="col-sm-8 col-md-7 col-lg-7 input-group">
-                  <textarea class="form-control" rows="5" />
+                  <textarea class="form-control" rows="3" />
                 </div>
               </div>
             </div>
@@ -129,11 +129,27 @@
 <script>
   import AppContent from 'components/AppContent';
   import TitleView from 'components/public/TitleView';
+  import { fetchBookInfo } from 'services/BookService';
 
   export default {
     components: {
       AppContent,
       TitleView,
+    },
+    data() {
+      return {
+        bookInfo: {
+          id: -1,
+          title: '',
+        },
+      };
+    },
+    created() {
+      fetchBookInfo(this.$route.params.bookId).then((resp) => {
+        if (resp.result === 0) {
+          this.bookInfo.title = this.$route.params.bookId;
+        }
+      });
     },
   };
 </script>
