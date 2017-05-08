@@ -37,3 +37,10 @@ export function setBookInfo(bookId, book) {
     data: book,
   });
 }
+
+export function deleteBook(bookId) {
+  return $.ajax({
+    type: 'DELETE',
+    url: apiUrl(`books/${bookId}`),
+  });
+}

@@ -167,6 +167,9 @@
           this.isLoading = false;
           if (resp.result === 0) {
             this.bookInfo = { ...resp.data };
+            this.bookInfo.price = Number(this.bookInfo.price).toFixed(2);
+            this.bookInfo.salePrice = Number(this.bookInfo.salePrice).toFixed(2);
+            this.bookInfo.saleDiscount = Number(this.bookInfo.saleDiscount).toFixed(2);
           }
         });
       }
@@ -197,15 +200,15 @@
 </script>
 
 <style rel="stylesheet/scss" lang="scss" scoped>
-  $loading--bgcolor: #00a65a;
+  $loading--bgColor: #00a65a;
   .loading {
     text-align: center;
     i {
-      color: $loading--bgcolor;
+      color: $loading--bgColor;
     }
     p {
       font-size: 18px;
-      color: $loading--bgcolor;
+      color: $loading--bgColor;
     }
   }
 </style>

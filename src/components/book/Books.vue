@@ -122,6 +122,7 @@
                   <template v-if="book.state === 'offSale'">
                     <a>上架</a>
                   </template>
+                  <a class="btn btn-link" @click="deleteBook(book.bookId)">删除</a>
                 </td>
               </tr>
               <tr v-show="index == isDetailShownIndex" style="background-color: #ccc">
@@ -156,7 +157,7 @@ import AppContent from 'components/AppContent';
 import TitleView from 'components/public/TitleView';
 import Page from 'components/public/Page';
 import AlertModal from 'components/public/AlertModal';
-import { fetchBooks, fetchBookCategories } from 'services/BookService';
+import { fetchBooks, fetchBookCategories, deleteBook } from 'services/BookService';
 import DatePicker from '../public/DatePicker';
 
 export default {
@@ -259,6 +260,13 @@ export default {
           this.checkedBookIds.push(this.books[index].bookId);
         }
       }
+    },
+    deleteBook(bookId) {
+      deleteBook(bookId).then((resp) => {
+        if (resp.result === 0) {
+          this.query();
+        }
+      });
     },
   },
   watch: {
