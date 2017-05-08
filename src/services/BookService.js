@@ -28,3 +28,12 @@ export function fetchBookInfo(bookId) {
     url: apiUrl(`books/${bookId}`),
   });
 }
+
+export function setBookInfo(bookId, book) {
+  return $.ajax({
+    type: 'PUT',
+    contentType: 'application/json',
+    url: apiUrl(`books/${bookId}`),
+    data: book,
+  });
+}
