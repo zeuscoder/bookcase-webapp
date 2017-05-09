@@ -70,11 +70,11 @@
       <div class="box-body">
         <div class="row" style="margin-bottom: 20px;">
           <div class="col-md-12">
-            <button class="btn btn-warning col-md-1 btn-margin">批量完善</button>
-            <button class="btn btn-info col-md-1 btn-margin">批量审核</button>
-            <button class="btn btn-success col-md-1 btn-margin">批量上架</button>
-            <button class="btn btn-success col-md-1 btn-margin">批量下架</button>
-            <button class="btn btn-danger col-md-1 btn-margin">批量删除</button>
+            <button class="btn btn-warning col-lg-1 col-md-2 btn-margin">批量完善</button>
+            <button class="btn btn-info col-lg-1 col-md-2 btn-margin">批量审核</button>
+            <button class="btn btn-success col-lg-1 col-md-2 btn-margin">批量上架</button>
+            <button class="btn btn-success col-lg-1 col-md-2 btn-margin">批量下架</button>
+            <button class="btn btn-danger col-lg-1 col-md-2 btn-margin" @click="batchDeleteBooks()">批量删除</button>
           </div>
         </div>
         <div class="table-responsive">
@@ -122,7 +122,7 @@
                   <template v-if="book.state === 'offSale'">
                     <a>上架</a>
                   </template>
-                  <a class="btn btn-link" @click="deleteBook(book.bookId)">删除</a>
+                  <a class="btn btn-link" @click="deleteBook(book.bookId, index)">删除</a>
                 </td>
               </tr>
               <tr v-show="index == isDetailShownIndex" style="background-color: #ccc">
@@ -132,10 +132,10 @@
                       <span class="col-md-2">
                         书籍页数：{{ book.pages }}
                       </span>
-                    <span class="col-md-2">
+                      <span class="col-md-2">
                         书籍评分：{{ book.rating }}
                       </span>
-                    <span class="col-md-2">
+                      <span class="col-md-2">
                         书籍简介：{{ book.summary }}
                       </span>
                   </div>
@@ -149,6 +149,7 @@
       </div>
     </div>
     <alert-modal ref="alertModal"></alert-modal>
+    <confirm-modal ref="confirmModal"></confirm-modal>
   </app-content>
 </template>
 
@@ -157,7 +158,8 @@ import AppContent from 'components/AppContent';
 import TitleView from 'components/public/TitleView';
 import Page from 'components/public/Page';
 import AlertModal from 'components/public/AlertModal';
-import { fetchBooks, fetchBookCategories, deleteBook } from 'services/BookService';
+import ConfirmModal from 'components/public/ConfirmModal';
+import { fetchBooks, fetchBookCategories, deleteBook, batchDeleteBooks } from 'services/BookService';
 import DatePicker from 'components/public/DatePicker';
 
 export default {
@@ -166,6 +168,7 @@ export default {
     TitleView,
     Page,
     AlertModal,
+    ConfirmModal,
     DatePicker,
   },
   data() {
@@ -186,7 +189,7 @@ export default {
       isDetailShownIndex: -1,
       total: 0,
       currentPage: 1,
-      shownRowsTotal: 9,
+      shownRowsTotal: 15,
       isAllChecked: false,
       checkedBookIds: [],
     };
@@ -261,12 +264,29 @@ export default {
         }
       }
     },
-    deleteBook(bookId) {
-      deleteBook(bookId).then((resp) => {
-        if (resp.result === 0) {
-          this.query();
-        }
+    deleteBook(bookId, index) {
+      const title = this.books[index].title;
+      const publisher = this.books[index].publisher;
+      this.$refs.confirmModal.show(`确认删除 [${publisher}: ${title}] 这本书?`, () => {
+        deleteBook(bookId).then((resp) => {
+          if (resp.result === 0) {
+            this.query();
+          }
+        });
       });
+    },
+    batchDeleteBooks() {
+      if (this.checkedBookIds.length === 0) {
+        this.$refs.alertModal.alert('请选择要删除的书籍');
+      } else {
+        this.$refs.confirmModal.show('确定删除?', () => {
+          batchDeleteBooks({ bookIds: this.checkedBookIds, state: 'deleted' }).then((resp) => {
+            if (resp.result === 0) {
+              this.query();
+            }
+          });
+        });
+      }
     },
   },
   watch: {

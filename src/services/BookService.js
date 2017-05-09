@@ -44,3 +44,10 @@ export function deleteBook(bookId) {
     url: apiUrl(`books/${bookId}`),
   });
 }
+
+export function batchDeleteBooks(params) {
+  return $.ajax({
+    type: 'PUT',
+    url: apiUrl('books/batchState', { ...params }),
+  });
+}
