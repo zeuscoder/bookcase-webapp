@@ -1,6 +1,7 @@
 <template>
   <app-content>
     <title-view title="书籍信息" slot="header"></title-view>
+    <loading-view-c :isLoading="isLoading"></loading-view-c>
 
     <div class="row" v-if="!isLoading">
       <!-- 基本信息 -->
@@ -132,24 +133,20 @@
         <button class="btn btn-success col-md-4 col-md-offset-2" @click="setBookInfo">确认修改</button>
       </div>
     </div>
-
-    <div class="loading" v-if="isLoading">
-      <i class="fa fa-spinner fa-pulse"></i>
-      <p>载入中...</p>
-    </div>
-
   </app-content>
 </template>
 
 <script>
   import AppContent from 'components/AppContent';
   import TitleView from 'components/public/TitleView';
+  import LoadingViewC from 'components/public/LoadingViewC';
   import { fetchBookInfo, setBookInfo } from 'src/services/BookService';
 
   export default {
     components: {
       AppContent,
       TitleView,
+      LoadingViewC,
     },
     data() {
       return {
@@ -199,16 +196,3 @@
   };
 </script>
 
-<style rel="stylesheet/scss" lang="scss" scoped>
-  $loading--bgColor: #00a65a;
-  .loading {
-    text-align: center;
-    i {
-      color: $loading--bgColor;
-    }
-    p {
-      font-size: 18px;
-      color: $loading--bgColor;
-    }
-  }
-</style>

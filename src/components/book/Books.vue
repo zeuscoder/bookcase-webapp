@@ -158,7 +158,7 @@ import TitleView from 'components/public/TitleView';
 import Page from 'components/public/Page';
 import AlertModal from 'components/public/AlertModal';
 import { fetchBooks, fetchBookCategories, deleteBook } from 'services/BookService';
-import DatePicker from '../public/DatePicker';
+import DatePicker from 'components/public/DatePicker';
 
 export default {
   components: {
