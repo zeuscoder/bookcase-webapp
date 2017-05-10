@@ -52,7 +52,7 @@
               <a><i class="fa ion-pricetag"></i> <span>交易平台</span></a>
             </router-link>
             <router-link to="/trades/records" tag="li">
-              <a><i class="fa ion-pricetag"></i> <span>交易记录</span></a>
+              <a><i class="fa ion-pricetag"></i> <span>交易管理</span></a>
             </router-link>
           </ul>
         </li>

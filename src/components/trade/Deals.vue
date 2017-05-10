@@ -1,6 +1,6 @@
 <template>
   <app-content>
-    <title-view title="交易管理" slot="header"></title-view>
+    <title-view title="交易平台" slot="header"></title-view>
     <div>123</div>
   </app-content>
 </template>
