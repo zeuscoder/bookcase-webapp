@@ -9,6 +9,7 @@ import Orders from 'components/order/Orders';
 import Articles from 'components/article/Articles';
 import Deals from 'components/trade/Deals';
 import Records from 'components/trade/Records';
+import Info from 'components/trade/Info';
 
 Vue.use(VueRouter);
 
@@ -50,6 +51,11 @@ const router = new VueRouter({
     {
       path: '/trades/records',
       component: Records,
+    },
+
+    {
+      path: '/trades/info',
+      component: Info,
     },
 
     {
