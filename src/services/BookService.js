@@ -45,7 +45,14 @@ export function deleteBook(bookId) {
   });
 }
 
-export function batchDeleteBooks(params) {
+export function setBookState(bookId, state) {
+  return $.ajax({
+    type: 'PUT',
+    url: apiUrl(`books/${bookId}/state`, { state }),
+  });
+}
+
+export function batchBooksState(params) {
   return $.ajax({
     type: 'PUT',
     url: apiUrl('books/batchState', { ...params }),

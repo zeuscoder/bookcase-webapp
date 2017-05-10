@@ -72,8 +72,8 @@
           <div class="col-md-12">
             <button class="btn btn-warning col-lg-1 col-md-2 btn-margin">批量完善</button>
             <button class="btn btn-info col-lg-1 col-md-2 btn-margin">批量审核</button>
-            <button class="btn btn-success col-lg-1 col-md-2 btn-margin">批量上架</button>
-            <button class="btn btn-success col-lg-1 col-md-2 btn-margin">批量下架</button>
+            <button class="btn btn-success col-lg-1 col-md-2 btn-margin" @click="batchChangeBookState('onSale')">批量上架</button>
+            <button class="btn btn-success col-lg-1 col-md-2 btn-margin" @click="batchChangeBookState('offSale')">批量下架</button>
             <button class="btn btn-danger col-lg-1 col-md-2 btn-margin" @click="batchDeleteBooks()">批量删除</button>
           </div>
         </div>
@@ -117,10 +117,10 @@
                     <a class="btn btn-link">审核</a>
                   </template>
                   <template v-if="book.state === 'onSale'">
-                    <a class="btn btn-link">下架</a>
+                    <a class="btn btn-link" @click="setBookState(book.bookId, 'offSale', index)">下架</a>
                   </template>
                   <template v-if="book.state === 'offSale'">
-                    <a>上架</a>
+                    <a class="btn btn-link" @click="setBookState(book.bookId, 'onSale', index)">上架</a>
                   </template>
                   <a class="btn btn-link" @click="deleteBook(book.bookId, index)">删除</a>
                 </td>
@@ -159,7 +159,7 @@ import TitleView from 'components/public/TitleView';
 import Page from 'components/public/Page';
 import AlertModal from 'components/public/AlertModal';
 import ConfirmModal from 'components/public/ConfirmModal';
-import { fetchBooks, fetchBookCategories, deleteBook, batchDeleteBooks } from 'services/BookService';
+import { fetchBooks, fetchBookCategories, deleteBook, setBookState, batchBooksState } from 'services/BookService';
 import DatePicker from 'components/public/DatePicker';
 
 export default {
@@ -264,29 +264,74 @@ export default {
         }
       }
     },
+    setBookState(bookId, state, index) {
+      const title = this.books[index].title;
+      const publisher = this.books[index].publisher;
+      const stateDesc = state === 'onSale' ? '上架' : '下架';
+      this.$refs.confirmModal.show(`确认${stateDesc} [${publisher}: ${title}] 这本书?`, () => {
+        setBookState(bookId, state).then((resp) => {
+          if (resp.result === 0) {
+            this.reload(resp.message, this.query);
+          } else {
+            this.alert(resp.message);
+          }
+        });
+      });
+    },
     deleteBook(bookId, index) {
       const title = this.books[index].title;
       const publisher = this.books[index].publisher;
       this.$refs.confirmModal.show(`确认删除 [${publisher}: ${title}] 这本书?`, () => {
         deleteBook(bookId).then((resp) => {
           if (resp.result === 0) {
-            this.query();
+            this.reload(resp.message, this.query);
+          } else {
+            this.alert(resp.message);
           }
         });
       });
     },
     batchDeleteBooks() {
-      if (this.checkedBookIds.length === 0) {
+      if (this.hasCheckedIds()) {
         this.$refs.alertModal.alert('请选择要删除的书籍');
       } else {
         this.$refs.confirmModal.show('确定删除?', () => {
-          batchDeleteBooks({ bookIds: this.checkedBookIds, state: 'deleted' }).then((resp) => {
+          batchBooksState({ bookIds: this.checkedBookIds, state: 'deleted' }).then((resp) => {
             if (resp.result === 0) {
-              this.query();
+              this.reload(resp.message, this.query);
+            } else {
+              this.alert(resp.message);
             }
           });
         });
       }
+    },
+    batchChangeBookState(state) {
+      const stateDesc = state === 'onSale' ? '上架' : '下架';
+      if (this.hasCheckedIds()) {
+        this.$refs.alertModal.alert(`请选择要${stateDesc}的书籍`);
+      } else {
+        this.$refs.confirmModal.show(`确定${stateDesc}?`, () => {
+          batchBooksState({ bookIds: this.checkedBookIds, state }).then((resp) => {
+            if (resp.result === 0) {
+              this.reload(resp.message, this.query);
+            } else {
+              this.alert(resp.message);
+            }
+          });
+        });
+      }
+    },
+    reload(msg, callBack) {
+      this.$refs.alertModal.alert(msg, () => {
+        callBack();
+      });
+    },
+    alert(msg) {
+      this.$refs.alertModal.alert(msg);
+    },
+    hasCheckedIds() {
+      return this.checkedBookIds.length === 0;
     },
   },
   watch: {
