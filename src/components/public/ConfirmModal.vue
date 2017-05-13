@@ -3,7 +3,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button type="button" class="close" @click="cancel" aria-label="Close">
             <span aria-hidden="true">×</span></button>
           <h4 class="modal-title">提示</h4>
         </div>
@@ -11,8 +11,10 @@
           {{ tips }}
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-          <button type="button" class="btn btn-success" data-dismiss="modal" @click="confirm">确定</button>
+          <button type="button" class="btn btn-default" @click="cancel">取消</button>
+          <button type="button" class="btn btn-success" @click="confirm" :disabled="disabled">
+            <i class="fa fa-spinner fa-pulse" v-if="disabled"></i>确定
+          </button>
         </div>
       </div>
     </div>
@@ -27,11 +29,14 @@ export default {
     return {
       tips: '',
       confirmAction: {},
+      ajax: false,
+      disabled: false,
     };
   },
   methods: {
-    show(tips, confirmAction = () => {}) {
+    show(tips, confirmAction = () => {}, ajax = false) {
       this.tips = tips;
+      this.ajax = ajax;
       this.confirmAction = confirmAction;
       $('#confirmModal').modal({
         backdrop: 'static',
@@ -39,7 +44,22 @@ export default {
       });
     },
     confirm() {
+      this.disabled = this.ajax;
       this.confirmAction();
+      if (!this.ajax) {
+        $('#confirmModal').modal('hide');
+      }
+    },
+    cancel() {
+      this.hide();
+    },
+    ajaxComplete() {
+      this.hide();
+    },
+    hide() {
+      this.ajax = false;
+      this.disabled = false;
+      $('#confirmModal').modal('hide');
     },
   },
 };

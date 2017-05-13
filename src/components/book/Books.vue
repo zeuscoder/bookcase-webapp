@@ -270,13 +270,14 @@ export default {
       const stateDesc = state === 'onSale' ? '上架' : '下架';
       this.$refs.confirmModal.show(`确认${stateDesc} [${publisher}: ${title}] 这本书?`, () => {
         setBookState(bookId, state).then((resp) => {
+          this.$refs.confirmModal.ajaxComplete();
           if (resp.result === 0) {
             this.reload(resp.message, this.query);
           } else {
             this.alert(resp.message);
           }
         });
-      });
+      }, true);
     },
     deleteBook(bookId, index) {
       const title = this.books[index].title;
