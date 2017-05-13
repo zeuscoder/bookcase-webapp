@@ -51,10 +51,10 @@
             <router-link to="/trades/deals" tag="li">
               <a><i class="fa fa-handshake-o"></i> <span>交易平台</span></a>
             </router-link>
-            <router-link to="/trades/records" tag="li">
+            <router-link to="/trades/info" tag="li">
               <a><i class="fa fa-bar-chart"></i> <span>交易管理</span></a>
             </router-link>
-            <router-link to="/trades/info" tag="li">
+            <router-link to="/trades/records" tag="li">
               <a><i class="fa fa-comments"></i> <span>交易记录</span></a>
             </router-link>
           </ul>
