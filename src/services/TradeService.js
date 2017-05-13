@@ -1,10 +1,10 @@
 import $ from 'jquery';
 import { apiUrl } from 'src/utils/api';
 
-export function fetchHome() {
+export function fetchTrades(params) {
   return $.ajax({
     type: 'GET',
-    url: apiUrl(''),
+    url: apiUrl('trades', { ...params }),
   });
 }
 
