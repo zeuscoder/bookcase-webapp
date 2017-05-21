@@ -45,6 +45,17 @@ export default {
 @import '../node_modules/admin-lte/dist/css/skins/skin-green.css';
 @import '../node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css';
 
+@font-face {
+  font-family: han-tang-fan;
+  src: url(./assets/font/hanfan.ttf);
+  font-display: swap;
+}
+
+* {
+  font-family: han-tang-fan;
+  font-size: 16px;
+}
+
 .table > thead > tr > th, .table > tbody > tr > td {
   height: 40px;
   box-sizing: border-box;
