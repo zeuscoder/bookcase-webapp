@@ -35,12 +35,12 @@
         <router-link to="/books" tag="li">
           <a><i class="fa fa-book"></i> <span>书籍管理</span></a>
         </router-link>
-        <router-link to="/articles" tag="li">
-          <a><i class="fa fa-tags"></i> <span>文章管理</span></a>
-        </router-link>
-        <router-link to="/orders" tag="li">
-          <a><i class="fa fa-shopping-cart"></i> <span>订单管理</span></a>
-        </router-link>
+        <!--<router-link to="/articles" tag="li">-->
+          <!--<a><i class="fa fa-tags"></i> <span>文章管理</span></a>-->
+        <!--</router-link>-->
+        <!--<router-link to="/orders" tag="li">-->
+          <!--<a><i class="fa fa-shopping-cart"></i> <span>订单管理</span></a>-->
+        <!--</router-link>-->
         <li class="treeview">
           <a href="#"><i class="fa fa-exchange"></i> <span>交易管理</span>
             <span class="pull-right-container">
@@ -48,9 +48,9 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <router-link to="/trades/deals" tag="li">
-              <a><i class="fa fa-handshake-o"></i> <span>交易平台</span></a>
-            </router-link>
+            <!--<router-link to="/trades/deals" tag="li">-->
+              <!--<a><i class="fa fa-handshake-o"></i> <span>交易平台</span></a>-->
+            <!--</router-link>-->
             <router-link to="/trades/info" tag="li">
               <a><i class="fa fa-bar-chart"></i> <span>交易管理</span></a>
             </router-link>
